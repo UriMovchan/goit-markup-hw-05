@@ -88,7 +88,53 @@ header {
     padding: 24px 0 25px;
     border-bottom: 1px solid #ECECEC;
 }
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.modal-box {
+    position: relative;
+    width: 528px;
+    height: 581px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+.modal-close svg {
+    width: 17px;
+    height: 17px;
+}
+.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
 .hidden {
     position: absolute !important;
     clip: rect(1px 1px 1px 1px);
@@ -133,12 +179,27 @@ nav {
     width: 294px;
     padding: 0;
 }
-
+.main-links a {
+    position: relative;
+    display: block;
+}
 .main-links li a {color: var(--text-dark);letter-spacing: 0.02em;}
 .main-links li a:hover,
 .main-links li a:focus,
 .main-links li a.active {
     color: var(--active-link);
+}
+.main-links a:hover::after,
+.main-links a:focus::after {
+    content: "";
+    position: absolute;
+    top: 44px;  
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #2196F3;
+    border-radius: 2px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .main-mail-tel {
     display: flex;
@@ -160,6 +221,7 @@ nav {
 .main-mail-tel li a:focus svg{
     color: var(--active-link);
     fill: var(--active-link);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .main-mail {
     display: block;
@@ -209,13 +271,15 @@ nav {
     border-radius: 4px;
     background: var(--active-link);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid transparent;
 }
 .bussines-solution button:hover,
 .bussines-solution button:focus {
     color: var(--active-link);
     border: 1px solid currentColor;
     background: var(--white);
-    padding: 9px 31px;
+    
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .features {
     padding: 94px 0 47px;
@@ -257,6 +321,37 @@ nav {
 
 .what-we-do li {width: 370px;}
 
+.what-we-do-item {
+    position: relative;
+}
+.what-we-do-info {
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    margin: 0;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 1;
+}
+.what-we-do-item::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 70px;
+    background: rgba(47, 48, 58, 0.8);
+}
 .our-team {
     padding: 94px 0;
     background: var(--background-grey);
@@ -301,11 +396,13 @@ nav {
 .our-team--info-soclink:focus {
     border-radius: 50%;
     background: var(--active-link);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
     
 }
 .our-team--info-soclink:hover .soc-svg,
 .our-team--info-soclink:focus .soc-svg {
     fill: var(--white);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .our-team--info-name {
     margin-bottom: 10px;
@@ -331,6 +428,7 @@ nav {
     color: var(--white);
     background: var(--active-link);
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .portfolio {
     padding: 94px 0 64px;
@@ -345,17 +443,48 @@ nav {
 }
 .portfolio-list-item:hover {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .portfolio-list-item {
     width: 370px;
     margin-bottom: 30px;
     border: 1px solid var(--border-grey);
 }
-.portfolio-list-item img {
+.portfolio-list-item-link {
+    position: relative;
+    display: block;
+}
+.portfolio-list-item-link-text {
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    height: 0;
+    padding: 0 24px;
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.555;
+    letter-spacing: 0.03em;
+    color: #FFFFFF;
+    background: rgba(33, 150, 243, 0.9);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.portfolio-list-item-link:hover .portfolio-list-item-link-text,
+.portfolio-list-item-link:focus .portfolio-list-item-link-text {    
+    height: 100%;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* .portfolio-list-item img {
     display: block;
     width: 370px;
     height: 294px;
-}
+} */
 .portfolio-list-item-info {
     margin: 20px 24px;
     flex-direction: column;    
@@ -397,10 +526,12 @@ nav {
 .partner-link:hover,
 .partner-link:focus {
     border: 1px solid var(--active-link);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .partner-link:hover .partner-svg,
 .partner-link:focus .partner-svg {
     fill: var(--active-link);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .partner-svg {
     display: block;
@@ -435,21 +566,23 @@ footer {
     padding:  60px 0 60px;
     background: var(--background-dark);
 }
-footer address {
-    margin-right: 70px;
-}
-address li { margin-bottom: 9px;}
+footer address { margin-right: 70px; }
+
+address li { margin-bottom: 9px; }
+
 address li, address a {
     color: var(--white);
     font-style: normal;
     line-height: 1.71;
 }
 
-.footer-mail-tel a{opacity: 0.6;}
+.footer-mail-tel a { opacity: 0.6; }
+
 .footer-mail-tel a:hover,
 .footer-mail-tel a:focus{
     color: var(--active-link);
     opacity: 1;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .footer.logo {
     margin-bottom: 20px;
@@ -477,7 +610,8 @@ footer .container {
 }
 .footer-soclink:hover,
 .footer-soclink:focus {
-    background: var(--active-link);  
+    background: var(--active-link); 
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
 }
 .soc-svg {
     display: block;
@@ -488,4 +622,5 @@ footer .container {
 .footer-soclink:hover .soc-svg,
 .footer-soclink:focus .soc-svg {
     fill: var(--white);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
